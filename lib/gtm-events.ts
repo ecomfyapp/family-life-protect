@@ -5,6 +5,9 @@ export type GtmEventPayload = Record<string, string | number | boolean | null | 
 declare global {
   interface Window {
     dataLayer?: GtmEventPayload[];
+    ttq?: {
+      track?: (event: string, payload?: GtmEventPayload) => void;
+    };
   }
 }
 
@@ -70,6 +73,20 @@ function trackVercelFunnelEvent(event: string, payload: GtmEventPayload) {
   }
 }
 
+function trackTikTokFunnelEvent(event: string, payload: GtmEventPayload) {
+  if (event !== "Lead") return;
+
+  try {
+    window.ttq?.track?.("CompleteRegistration", {
+      ...payload,
+      content_name: "IUL Lead",
+      content_type: "lead",
+    });
+  } catch {
+    // TikTok tracking must never block the lead flow.
+  }
+}
+
 export function pushGtmEvent(event: string, payload: GtmEventPayload = {}) {
   if (typeof window === "undefined") return;
 
@@ -80,6 +97,7 @@ export function pushGtmEvent(event: string, payload: GtmEventPayload = {}) {
   });
 
   trackVercelFunnelEvent(event, payload);
+  trackTikTokFunnelEvent(event, payload);
 
   if (!["PageView", "ViewContent", "Lead", "Contact"].includes(event)) return;
 
