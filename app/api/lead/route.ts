@@ -468,6 +468,7 @@ export async function POST(request: Request) {
   const leadDomain = getLeadDomain();
   const sub1 = normalizeString(restAnswers.sub1);
   const sub2 = normalizeString(restAnswers.sub2);
+  const adaccountName = normalizeString(restAnswers.adaccountName);
   const lead = {
     submittedAt,
     source: "better-life-next",
@@ -478,6 +479,7 @@ export async function POST(request: Request) {
     domain: leadDomain,
     sub1,
     sub2,
+    adaccountName,
     ipAddress: requestIp,
     geolocation: geo,
     trustedFormCertUrl,
@@ -541,6 +543,7 @@ export async function POST(request: Request) {
       device_id: deviceId || null,
       validation: lead.validation,
       risk_flags: riskFlags,
+      adaccount_name: adaccountName || null,
       payload: lead,
     });
 

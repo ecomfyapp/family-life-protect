@@ -35,6 +35,7 @@ create table public.lead_metadata (
   device_id text,
   validation jsonb,
   risk_flags text[],
+  adaccount_name text,
   payload jsonb,
   lead_status_history jsonb not null default '[]'::jsonb,
   trustedform_claim_status text,
