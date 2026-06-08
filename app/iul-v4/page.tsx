@@ -368,8 +368,6 @@ function getPhoneValidationMessage(value: string) {
     return "Ingresa un número real de EE.UU.";
   }
 
-  return "";
-
   if (
     digits === "0123456789" ||
     digits === "1234567890" ||
