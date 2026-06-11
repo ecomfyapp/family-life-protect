@@ -469,6 +469,9 @@ export default function PopUp1({
         )}
         {showActions ? (
           <div className="mt-6 grid animate-[fade-up_.35s_ease-out] gap-3">
+            <p className="text-[13px] font-bold leading-tight text-[#5d6674]">
+              Es necesario designar un beneficiario.
+            </p>
             <a
               ref={primaryLinkRef}
               data-popup1-ringba-phone
@@ -505,7 +508,7 @@ export default function PopUp1({
                 height={980}
                 className="h-[18px] w-[14px] shrink-0 object-contain"
               />
-              <span className="underline decoration-1 underline-offset-4">
+              <span className="font-light underline decoration-1 underline-offset-4">
                 {secondaryLabel}
               </span>
             </button>
