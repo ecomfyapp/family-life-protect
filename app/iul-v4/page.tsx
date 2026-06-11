@@ -960,6 +960,17 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
+    if (process.env.NODE_ENV !== "development") return;
+
+    const searchParams = new URLSearchParams(window.location.search);
+    if (searchParams.get("preview_popup1") === "1") {
+      setSubmittedFirstName("Antony");
+      setSubmittedInsuranceGoal("Ahorrar e invertir");
+      setIsPayPerCallPopupOpen(true);
+    }
+  }, []);
+
+  useEffect(() => {
     return () => {
       if (transitionTimeoutRef.current !== null) {
         window.clearTimeout(transitionTimeoutRef.current);
@@ -1655,6 +1666,7 @@ export default function Home() {
         nextParams.set("lead_id", leadId);
       }
       nextParams.set("first_name", completedAnswers.firstName.trim());
+      nextParams.set("age_group", completedAnswers.ageGroup);
       nextParams.set("insurance_goal", completedAnswers.insuranceGoal);
       nextParams.set("application_number", buildApplicationNumber(leadId));
       if (activeRuntimeConfig.payPerCallPhoneNumber) {
